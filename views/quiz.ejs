@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Quiz</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/assets/quiz.js" type="text/javascript"></script>
+    <link href="/assets/quizStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+<button id="startBtn" onclick="starting();">start</button>
+<div id="quizContainer">
+    <div id="timer">time</div>
+    <div id="timer">qst number</div>
+    <div id="timer">score</div>
+    <div id="questionContainer" >
+    <p id="questionText"> some text here...?</p>
+    <img id="questionImage" src="/assets/images/questionImage.png"> 
+    
+    </div>
+    <div id="optionsContainer">
+    <ul id="optionsList">
+        <li onclick="checkAnswer();">answer 1</li>
+        <li onclick="checkAnswer();">answer 2</li>
+        <li onclick="checkAnswer();">answer 3</li>
+        <li onclick="checkAnswer();">answer 4</li>
+    </ul>
+    </div>
+    
+    </div>    
+
+</body>
+
+
+
+
+
+
+
+
+</html>
