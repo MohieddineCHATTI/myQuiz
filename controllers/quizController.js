@@ -32,29 +32,37 @@ module.exports = (function(app){
   app.get('/quiz', function(req, res){
            res.render('quiz');
        });
- 
-
-    
+ var filtredEasyQst,filtredMediumQst,filtredHardQst;
     app.post('/qstDataBase',urlencodedParser, function(req, res){
         var allQst;
         var majors = req.body.majors;
         var lang = req.body.lang;
+        console.log(lang);
+        console.log(majors);
         // getting data base and storing it in a variable -allQst
        Qst.find({}, function(err, data){
            if (err) throw err;
            allQst = data;
-           
+           console.log(majors);
+          filtredEasyQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif=='easy');
+           console.log(filtredEasyQst);
+           filtredMediumQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif=='medium');
+           console.log(filtredMediumQst);
+           filtredHardQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif=='hard');
+           console.log(filtredHardQst);
        })
    }); 
     
     
-   app.post('/quiz', urlencodedParser, function(req, res){
+    
+    
+  app.post('/quiz', urlencodedParser, function(req, res){
        var newQst = Qst(req.body).save(function(err,data){
          if (err) throw err;
         res.json(data);
        });
        }); 
-    
+
     
     
    app.get('/quiz', function(req, res){

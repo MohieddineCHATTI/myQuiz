@@ -30,6 +30,7 @@
 #optionsList{
     text-align: center;
     list-style: none;
+    padding: 0;
 }
 #optionsList li{
     padding: 4px;

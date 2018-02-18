@@ -174,6 +174,13 @@ var qsts;
 var fltr = {
     lang: 'english',
     majors: 'drilling'
+    
+    /*majors:{
+        1:
+        2:
+        3:
+        4:
+    }*/ 
 }
 function starting(){
     alert('starting');
@@ -182,6 +189,7 @@ function starting(){
        
         type: 'POST',
         url: '/qstDataBase',
+        dataType: 'application/json',
         data: fltr,
         success: function(data){
             qsts = data;
@@ -192,7 +200,7 @@ function starting(){
 }
 
 
-function fillDataBase() {
+/*function fillDataBase() {
 
     for (i = 0; i < qst_data_base.length; i++) {
         var item = qst_data_base[i];
@@ -209,4 +217,4 @@ function fillDataBase() {
     }
 }
 
-fillDataBase();
+fillDataBase();*/
