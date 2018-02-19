@@ -183,7 +183,7 @@ var fltr = {
     }*/ 
 }
 function starting(){
-    alert('starting');
+   console.log('starting');
     
     $.ajax({
        
@@ -196,6 +196,20 @@ function starting(){
             console.log(qsts);
         }
         
+    });
+}
+
+
+function nextQst(){
+    $.ajax({
+       type: 'GET',
+        url: '/getNextQuestion',
+        success: function(data){
+            
+             console.log(data);
+            
+        },
+       
     });
 }
 
