@@ -112,10 +112,10 @@ var filtredEasyQst=[], filtredMediumQst = [], filtredHardQst = [];
             //console.log(filtredHardQst);
             //console.log('sqjsq');
             }
-
+var qstNumber = 0;
 app.get('/getNextQuestion', urlencodedParser, function(req, res){
-    res.send(allFiltredQst[req.body])
-    
+    res.send(allFiltredQst[qstNumber])
+    qstNumber++;
 });
 
 

@@ -1,5 +1,7 @@
 function checkAnswer() {
     alert('checking answer');
+    
+   
 }
 var qst_data_base = [
     {
@@ -199,11 +201,11 @@ function starting(){
     });
 }
 
-
 function nextQst(){
-    $.ajax({
+
+     $.ajax({
        type: 'GET',
-        url: '/getNextQuestion',
+        url: '/getNextQuestion/',
         success: function(data){
             
              console.log(data);
@@ -211,6 +213,7 @@ function nextQst(){
         },
        
     });
+
 }
 
 
