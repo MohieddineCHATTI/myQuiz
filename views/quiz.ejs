@@ -9,27 +9,27 @@
 
 
 <body>
-<button id="startBtn" onclick="starting();">start</button>
-<button id="nextQst" onclick="nextQst();">next</button>
-<div id="quizContainer">
-    <div id="timer">time</div>
-    <div id="timer">qst number</div>
-    <div id="timer">score</div>
-    <div id="questionContainer" >
-    <p id="questionText"> some text here...?</p>
-    <img id="questionImage" src="/assets/images/questionImage.png"> 
-    
+    <button id="startBtn" onclick="starting();">start</button>
+    <button id="nextQst" onclick="nextQst();">next</button>
+    <div id="quizContainer">
+        <div id="timer">time</div>
+        <div id="qstNumber">qst number</div>
+        <div id="score">score</div>
+        <div id="questionContainer">
+            <p id="questionText"> some text here...?</p>
+            <img id="questionImage" src="/assets/images/questionImage.png">
+
+        </div>
+        <div id="optionsContainer">
+            <ul id="optionsList">
+                <li id='opt1' class="opt"></li>
+                <li id='opt2' class="opt"></li>
+                <li id='opt3' class="opt"></li>
+                <li id='opt4' class="opt"></li>
+            </ul>
+        </div>
+
     </div>
-    <div id="optionsContainer">
-    <ul id="optionsList">
-        <li onclick="checkAnswer();">answer 1</li>
-        <li onclick="checkAnswer();">answer 2</li>
-        <li onclick="checkAnswer();">answer 3</li>
-        <li onclick="checkAnswer();">answer 4</li>
-    </ul>
-    </div>
-    
-    </div>    
 
 </body>
 

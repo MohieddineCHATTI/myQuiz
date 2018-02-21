@@ -1,223 +1,141 @@
 function checkAnswer() {
-    alert('checking answer');
-    
+    if ($(this).text()===qst[qstNumber-1]['correct'+filter.lang]){
+        console.log('correct answer well done');
+    }else{
+       console.log('wrong answer'); 
+    }
+    var options = [...document.querySelectorAll('.opt')];
+    for( i = 0; i < options.length; i++){
+        if( options[i].innerHTML === qst[qstNumber-1]['correct'+filter.lang] ){
+        document.getElementById(options[i].id).style.backgroundColor= 'green';
+        }else{ 
+        document.getElementById(options[i].id).style.backgroundColor= 'red';
+        }
+        
+        
+    }
+    $(document).undelegate('.opt','click',checkAnswer);
    
-}
-var qst_data_base = [
-    {
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "drilling",
-        dif: 'easy'
-},
-    {
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "production",
-        dif: 'easy'
-},{
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "geology",
-        dif: 'easy'
-},
-    {
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "drilling",
-        dif: 'medium'
-},
-    {
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "production",
-        dif: 'medium'
-},{
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "geology",
-        dif: 'medium'
-},{
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "drilling",
-        dif: 'hard'
-},
-    {
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "production",
-        dif: 'hard'
-},{
-        qstEn: "String",
-        qstFr: "String",
-        opt1En: "String",
-        opt1Fr: "String",
-        opt2En: "String",
-        opt2Fr: "String",
-        opt3En: "String",
-        opt3Fr: "String",
-        opt4En: "String",
-        opt4Fr: "String",
-        correctEn: "String",
-        correctFr: "String",
-        qstImage: "String",
-        descEn: "String",
-        descFr: "String",
-        major: "geology",
-        dif: 'hard'
-}
-];
-var qsts;
-var fltr = {
-    lang: 'english',
-    majors: 'drilling'
+}   
+       
     
+
+
+
+
+var qstNumber = 0;
+function nextQst(){
+    if(qstNumber<14){
+    // updating qsts
+    document.getElementById('qstNumber').innerText = qstNumber+1;
+    document.getElementById('questionText').innerText = qst[qstNumber]['qst'+filter.lang];
+        for ( i = 1; i<=4; i++){
+    document.getElementById('opt'+i).innerText = qst[qstNumber]['opt'+i+filter.lang];
+    document.getElementById('opt'+i).style.backgroundColor = '#cccccc';
+     
+   }
+        qstNumber++;
+    $(document).delegate('.opt','click',checkAnswer);
+    
+} 
+}
+
+var qst;
+
+var filter = {
+    lang: 'Fr',
+    majors: 'drilling'
+
     /*majors:{
         1:
         2:
         3:
         4:
-    }*/ 
+    }*/
 }
-function starting(){
-   console.log('starting');
-    
+
+function starting() {
+    console.log('starting');
+
     $.ajax({
-       
+
         type: 'POST',
         url: '/qstDataBase',
-        dataType: 'application/json',
-        data: fltr,
-        success: function(data){
-            qsts = data;
-            console.log(qsts);
+        data: filter,
+        success: function (data) {
+            qst = data;
+            nextQst();
         }
-        
+
     });
 }
 
-function nextQst(){
 
-     $.ajax({
-       type: 'GET',
-        url: '/getNextQuestion/',
-        success: function(data){
-            
-             console.log(data);
-            
-        },
-       
-    });
-
+/*
+var qst_data_base = [
+    {
+        qstEn: "drilling easy qst",
+        qstFr: "qst facie forage",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong",
+        opt2Fr: "faux",
+        opt3En: "wrong",
+        opt3Fr: "faux",
+        opt4En: "wrong",
+        opt4Fr: "faux",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "drilling",
+        dif: 'easy'
+},
+    {
+        qstEn: "drilling medium qst",
+        qstFr: "qst medium forage",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong",
+        opt2Fr: "faux",
+        opt3En: "wrong",
+        opt3Fr: "faux",
+        opt4En: "wrong",
+        opt4Fr: "faux",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "drilling",
+        dif: 'medium'
+},
+    {
+        qstEn: "drilling hard qst",
+        qstFr: "qst difficile forage",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong",
+        opt2Fr: "faux",
+        opt3En: "wrong",
+        opt3Fr: "faux",
+        opt4En: "wrong",
+        opt4Fr: "faux",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "drilling",
+        dif: 'hard'
 }
+    
+];
+*/
 
-
-/*function fillDataBase() {
+/*
+function fillDataBase() {
 
     for (i = 0; i < qst_data_base.length; i++) {
         var item = qst_data_base[i];
@@ -234,4 +152,5 @@ function nextQst(){
     }
 }
 
-fillDataBase();*/
+fillDataBase();
+*/
