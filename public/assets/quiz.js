@@ -1,43 +1,59 @@
 function checkAnswer() {
-    if ($(this).text()===qst[qstNumber-1]['correct'+filter.lang]){
+    $(document).undelegate('.opt', 'click', checkAnswer);
+    var myAnswer = $(this).text();
+    if ($(this).text() === qst[qstNumber - 1]['correct' + filter.lang]) {
         console.log('correct answer well done');
-    }else{
-       console.log('wrong answer'); 
+        correctAnswers++;
+        document.getElementById('correct').play();
+    } else {
+        console.log('wrong answer');
+        wrongAnswers++;
+        document.getElementById('false').play();
     }
     var options = [...document.querySelectorAll('.opt')];
-    for( i = 0; i < options.length; i++){
-        if( options[i].innerHTML === qst[qstNumber-1]['correct'+filter.lang] ){
-        document.getElementById(options[i].id).style.backgroundColor= 'green';
-        }else{ 
-        document.getElementById(options[i].id).style.backgroundColor= 'red';
+    for (i = 0; i < options.length; i++) {
+        if (options[i].innerHTML === qst[qstNumber - 1]['correct' + filter.lang]) {
+            document.getElementById(options[i].id).style.backgroundColor = '#9ce589';
+        } else if (options[i].innerHTML == myAnswer) {
+            document.getElementById(options[i].id).style.backgroundColor = '#e58989';
+        } else {
+            document.getElementById(options[i].id).style.backgroundColor = '#e5e189';
+
         }
-        
-        
+
     }
-    $(document).undelegate('.opt','click',checkAnswer);
-   
-}   
-       
-    
+    setTimeout(nextQst, 2000);
+}
 
 
 
 
-var qstNumber = 0;
-function nextQst(){
-    if(qstNumber<14){
-    // updating qsts
-    document.getElementById('qstNumber').innerText = qstNumber+1;
-    document.getElementById('questionText').innerText = qst[qstNumber]['qst'+filter.lang];
-        for ( i = 1; i<=4; i++){
-    document.getElementById('opt'+i).innerText = qst[qstNumber]['opt'+i+filter.lang];
-    document.getElementById('opt'+i).style.backgroundColor = '#cccccc';
-     
-   }
+
+
+var qstNumber = 0,
+    score = 0,
+    t, correctAnswers = 0,
+    wrongAnswers = 0;
+
+function nextQst() {
+    if (qstNumber < 14) {
+        // updating qsts
+        document.getElementById('qstNumber').innerText = qstNumber + 1;
+        document.getElementById('questionText').innerText = qst[qstNumber]['qst' + filter.lang];
+        for (i = 1; i <= 4; i++) {
+            document.getElementById('opt' + i).innerText = qst[qstNumber]['opt' + i + filter.lang];
+            document.getElementById('opt' + i).style.backgroundColor = '#cccccc';
+
+        }
         qstNumber++;
-    $(document).delegate('.opt','click',checkAnswer);
-    
-} 
+
+        // start time
+        times_up = false;
+
+        $(document).delegate('.opt', 'click', checkAnswer);
+
+
+    }
 }
 
 var qst;
@@ -72,18 +88,19 @@ function starting() {
 
 
 /*
+
 var qst_data_base = [
     {
         qstEn: "drilling easy qst",
         qstFr: "qst facie forage",
         opt1En: "correct",
         opt1Fr: "juste",
-        opt2En: "wrong",
-        opt2Fr: "faux",
-        opt3En: "wrong",
-        opt3Fr: "faux",
-        opt4En: "wrong",
-        opt4Fr: "faux",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
         correctEn: "correct",
         correctFr: "juste",
         qstImage: "",
@@ -97,12 +114,12 @@ var qst_data_base = [
         qstFr: "qst medium forage",
         opt1En: "correct",
         opt1Fr: "juste",
-        opt2En: "wrong",
-        opt2Fr: "faux",
-        opt3En: "wrong",
-        opt3Fr: "faux",
-        opt4En: "wrong",
-        opt4Fr: "faux",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
         correctEn: "correct",
         correctFr: "juste",
         qstImage: "",
@@ -116,12 +133,12 @@ var qst_data_base = [
         qstFr: "qst difficile forage",
         opt1En: "correct",
         opt1Fr: "juste",
-        opt2En: "wrong",
-        opt2Fr: "faux",
-        opt3En: "wrong",
-        opt3Fr: "faux",
-        opt4En: "wrong",
-        opt4Fr: "faux",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
         correctEn: "correct",
         correctFr: "juste",
         qstImage: "",
@@ -134,7 +151,9 @@ var qst_data_base = [
 ];
 */
 
+
 /*
+
 function fillDataBase() {
 
     for (i = 0; i < qst_data_base.length; i++) {
@@ -153,4 +172,5 @@ function fillDataBase() {
 }
 
 fillDataBase();
+
 */
