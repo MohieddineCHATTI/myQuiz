@@ -42,3 +42,6 @@
     background: #fff491;
     cursor: pointer;
 }
+#finish{
+    display : none;
+}

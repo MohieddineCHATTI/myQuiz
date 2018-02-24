@@ -10,7 +10,9 @@
 
 <body>
     <button id="startBtn" onclick="starting();">start</button>
-    <button id="nextQst" onclick="nextQst();">next</button>
+    <button id="savescore" onclick="saveScore();">save</button>
+
+
     <div id="quizContainer">
         <div id="timer">time</div>
         <div id="qstNumber">qst number</div>
@@ -28,13 +30,46 @@
                 <li id='opt4' class="opt"></li>
             </ul>
         </div>
-        <audio id="correct">
+    </div>
+
+    <div id="finish">
+
+        <form action="/highScores" method="post">
+            name:<br>
+            <input type="text" name="name" value=<%=data.name %> readonly><br> score:
+            <br>
+            <input type="text" name="score" value=14 readonly><br> country:
+            <br>
+            <input type="text" name="country" value="country" readonly><br> correctAnswers:
+            <br>
+            <input type="text" name="correctAns" readonly><br> wrongAnswers:
+            <br>
+            <input type="text" name="wrongAns" readonly>
+            <br>major:<br>
+            <input type="text" name="major" value="drilling"><button type="submit">ok</button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <audio id="correct">
   <source src="/assets/sounds/correct.mp3" type="audio/mpeg">
     </audio>
     <audio id="false">
   <source src="/assets/sounds/false.mp3" type="audio/mpeg">
     </audio>
-    </div>
+
 
 </body>
 

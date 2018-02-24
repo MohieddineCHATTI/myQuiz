@@ -5,7 +5,7 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 
 
-mongoose.connect('mongodb://quizUser:quizUser@ds239988.mlab.com:39988/qst-data-base');
+mongoose.connect('mongodb://quizuser:quizuser@ds247678.mlab.com:47678/quiz-data-base');
 
 var questionSchema = new mongoose.Schema({
     qstEn: String,
@@ -26,15 +26,28 @@ var questionSchema = new mongoose.Schema({
     major: String,
     dif: String
 });
-
+var scoreSchema = new mongoose.Schema({
+    name: String,
+    score: Number,
+    country: String,
+    wrongAns: Number,
+    correctAns: Number,
+    major: String
+});
 var Qst = mongoose.model('qst', questionSchema);
-
+var Score = mongoose.model('score', scoreSchema)
 module.exports = (function (app) {
     var filtredEasyQst = [],
         filtredMediumQst = [],
         filtredHardQst = [];
+    app.get('/', function (req, res) {
+        res.render('index');
+    });
     app.get('/quiz', function (req, res) {
-        res.render('quiz');
+        res.render('quiz', {
+            data: req.query
+        });
+
     });
 
     app.post('/qstDataBase', urlencodedParser, function (req, res) {
@@ -113,10 +126,6 @@ module.exports = (function (app) {
 
 
 
-
-
-
-
     app.post('/quiz', urlencodedParser, function (req, res) {
         var newQst = Qst(req.body).save(function (err, data) {
             if (err) throw err;
@@ -126,7 +135,16 @@ module.exports = (function (app) {
 
 
 
-    app.get('/quiz', function (req, res) {
+    app.post('/highScores', urlencodedParser, function (req, res) {
+        console.log(req.body);
+        var newScore = Score(req.body).save(function (err, data) {
+            if (err) throw err;
+        });
+        Score.find({}, function (err, data) {
+            if (err) throw err;
+            /*res.json(data);*/
 
-    });
+        });
+    })
+
 });

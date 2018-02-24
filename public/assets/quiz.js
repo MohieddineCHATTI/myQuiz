@@ -1,9 +1,11 @@
 function checkAnswer() {
     $(document).undelegate('.opt', 'click', checkAnswer);
+    clearInterval(count);
     var myAnswer = $(this).text();
     if ($(this).text() === qst[qstNumber - 1]['correct' + filter.lang]) {
         console.log('correct answer well done');
         correctAnswers++;
+        score = score + t;
         document.getElementById('correct').play();
     } else {
         console.log('wrong answer');
@@ -21,7 +23,9 @@ function checkAnswer() {
 
         }
 
+
     }
+    console.log(score);
     setTimeout(nextQst, 2000);
 }
 
@@ -30,13 +34,14 @@ function checkAnswer() {
 
 
 
-var qstNumber = 0,
+var qstNumber = 12,
     score = 0,
     t, correctAnswers = 0,
-    wrongAnswers = 0;
+    wrongAnswers = 0,
+    count;
 
 function nextQst() {
-    if (qstNumber < 14) {
+    if (qstNumber < 15) {
         // updating qsts
         document.getElementById('qstNumber').innerText = qstNumber + 1;
         document.getElementById('questionText').innerText = qst[qstNumber]['qst' + filter.lang];
@@ -48,10 +53,39 @@ function nextQst() {
         qstNumber++;
 
         // start time
-        times_up = false;
+        t = 16
+        count = setInterval(function () {
+            t--;
+            console.log('t is =' +
+                t);
+            if (t == 0) {
+                $(document).undelegate('.opt', 'click', checkAnswer);
+                clearInterval(count);
+                wrongAnswers++;
+                document.getElementById('false').play();
+                var options = [...document.querySelectorAll('.opt')];
+                for (i = 0; i < options.length; i++) {
+                    if (options[i].innerHTML === qst[qstNumber - 1]['correct' + filter.lang]) {
+                        document.getElementById(options[i].id).style.backgroundColor = '#9ce589';
+                    } else {
+                        document.getElementById(options[i].id).style.backgroundColor = '#e58989';
+
+                    }
+
+                }
+                setTimeout(nextQst, 2000);
+            }
+        }, 1000);
 
         $(document).delegate('.opt', 'click', checkAnswer);
 
+
+    } else {
+
+        document.getElementById('quizContainer').style.display = "none";
+        $('input[name = correctAns]').val(correctAnswers);
+        $('input[name = wrongAns]').val(wrongAnswers);
+        document.getElementById('finish').style.display = "block";
 
     }
 }
@@ -86,9 +120,27 @@ function starting() {
     });
 }
 
+var newScore = {
+    name: "moh",
+    score: 50,
+    country: "algeria",
+    wrongAns: 12,
+    correctAns: 3
+}
+/*function saveScore(){
+    $.ajax({
+       
+        type: "POST",
+        url: "/highScores",
+        data: newScore,
+        success: function(data){
+          return;  
+        },
+    });
+}*/
+
 
 /*
-
 var qst_data_base = [
     {
         qstEn: "drilling easy qst",
@@ -147,13 +199,12 @@ var qst_data_base = [
         major: "drilling",
         dif: 'hard'
 }
-    
-];
-*/
+
+];*/
+
 
 
 /*
-
 function fillDataBase() {
 
     for (i = 0; i < qst_data_base.length; i++) {
@@ -171,6 +222,4 @@ function fillDataBase() {
     }
 }
 
-fillDataBase();
-
-*/
+fillDataBase();*/
