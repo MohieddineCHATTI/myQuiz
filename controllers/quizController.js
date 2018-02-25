@@ -64,11 +64,11 @@ module.exports = (function (app) {
             if (err) throw err;
             allQst = data;
             //console.log(majors);
-            filtredEasyQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif == 'easy');
+            filtredEasyQst = allQst.filter(qst => (qst.major.includes(majors)) && qst.dif == 'easy');
             // console.log(filtredEasyQst);
-            filtredMediumQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif == 'medium');
+            filtredMediumQst = allQst.filter(qst => (qst.major.includes(majors)) && qst.dif == 'medium');
             // console.log(filtredMediumQst);
-            filtredHardQst = allQst.filter(qst => majors.includes(qst.major) && qst.dif == 'hard');
+            filtredHardQst = allQst.filter(qst => (qst.major.includes(majors)) && qst.dif == 'hard');
             //console.log(filtredHardQst);
         }).then(randomQstGenerator).then(function () {
             res.send(allFiltredQst);
@@ -88,8 +88,6 @@ module.exports = (function (app) {
                     if (!easyIndex.includes(j)) {
                         allFiltredQst.push(filtredEasyQst[j]);
                         easyIndex.push(j);
-                        console.log("index is" + index);
-                        console.log("j is" + j);
                         index++;
                     }
 
@@ -142,7 +140,11 @@ module.exports = (function (app) {
         });
         Score.find({}, function (err, data) {
             if (err) throw err;
-            /*res.json(data);*/
+            var sortedScores = data.sort(function (s1, s2) {
+                return (s2.score - s1.score);
+            })
+
+            res.json(sortedScores);
 
         });
     })

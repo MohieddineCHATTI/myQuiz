@@ -1,3 +1,19 @@
+#start {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#langSelect {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#langSelect img {
+    width: 30%;
+    display: inline;
+
+}
+
 #quizContainer {
     width: 70%;
     background: beige;
@@ -14,34 +30,41 @@
     margin: 0 auto;
     text-align: center;
 }
-#questionText{
+
+#questionText {
     font-size: 1.2rem;
     margin: 3px auto;
 }
-#questionImage{
+
+#questionImage {
     width: 20%;
     border: 1px solid black;
     padding: 5px;
 }
-#optionsContainer{
+
+#optionsContainer {
     width: 80%;
     margin: 0 auto;
 }
-#optionsList{
+
+#optionsList {
     text-align: center;
     list-style: none;
     padding: 0;
 }
-#optionsList li{
+
+#optionsList li {
     padding: 4px;
     box-shadow: 0 0 2px black;
     text-align: center;
     margin: 5px auto;
 }
-#optionsList li:hover{
+
+#optionsList li:hover {
     background: #fff491;
     cursor: pointer;
 }
-#finish{
-    display : none;
+
+#finish {
+    display: none;
 }

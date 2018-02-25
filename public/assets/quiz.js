@@ -1,3 +1,19 @@
+function majorAndLanguage() {
+    filter.lang = $('#languageSelect').val();
+    filter.majors = $('#majorSelect').val();
+    console.log(filter);
+    starting();
+
+}
+
+
+
+
+
+
+
+
+
 function checkAnswer() {
     $(document).undelegate('.opt', 'click', checkAnswer);
     clearInterval(count);
@@ -91,18 +107,7 @@ function nextQst() {
 }
 
 var qst;
-
-var filter = {
-    lang: 'Fr',
-    majors: 'drilling'
-
-    /*majors:{
-        1:
-        2:
-        3:
-        4:
-    }*/
-}
+var filter = {};
 
 function starting() {
     console.log('starting');

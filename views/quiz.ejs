@@ -5,13 +5,29 @@
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="/assets/quiz.js" type="text/javascript"></script>
     <link href="/assets/quizStyle.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
 </head>
 
 
 <body>
     <button id="startBtn" onclick="starting();">start</button>
     <button id="savescore" onclick="saveScore();">save</button>
+    <div id="start">
+        Select language:
+        <select id="languageSelect">
+        <option value="En">english</option>
+        <option value="Fr" selected='selected'>Français</option>
+        <option value="Es">Espaol</option>
+        </select> Select Major:
+        <select id="majorSelect" name="majorSelect">
+        <option value="all">All</option>
+        <option value="drilling">Drilling</option>
+        <option value="geology">Geology</option>
+        </select>
 
+        <button onclick="majorAndLanguage();">start</button>
+
+    </div>
 
     <div id="quizContainer">
         <div id="timer">time</div>
@@ -38,7 +54,7 @@
             name:<br>
             <input type="text" name="name" value=<%=data.name %> readonly><br> score:
             <br>
-            <input type="text" name="score" value=14 readonly><br> country:
+            <input type="text" name="score" value=14><br> country:
             <br>
             <input type="text" name="country" value="country" readonly><br> correctAnswers:
             <br>
