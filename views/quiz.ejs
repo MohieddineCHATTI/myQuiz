@@ -15,14 +15,15 @@
     <div id="start">
         Select language:
         <select id="languageSelect">
-        <option value="En">english</option>
-        <option value="Fr" selected='selected'>Français</option>
-        <option value="Es">Espaol</option>
+        <option value="En" selected>english</option>
+        <option value="Fr">Français</option>
+        <option value="Es" disabled>español</option>
         </select> Select Major:
         <select id="majorSelect" name="majorSelect">
         <option value="all">All</option>
-        <option value="drilling">Drilling</option>
-        <option value="geology">Geology</option>
+        <option value="drilling">Drilling and well interventions</option>
+        <option value="geology">Geology and geophysique</option>
+        <option value="production">Production and exploitation</option>
         </select>
 
         <button onclick="majorAndLanguage();">start</button>
@@ -50,7 +51,7 @@
 
     <div id="finish">
 
-        <form action="/highScores" method="post">
+        <div>
             name:<br>
             <input type="text" name="name" value=<%=data.name %> readonly><br> score:
             <br>
@@ -62,10 +63,10 @@
             <br>
             <input type="text" name="wrongAns" readonly>
             <br>major:<br>
-            <input type="text" name="major" value="drilling"><button type="submit">ok</button>
+            <input type="text" name="major" value=""><button onclick="saveScore();">ok</button>
 
 
-        </form>
+        </div>
 
 
     </div>

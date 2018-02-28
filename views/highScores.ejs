@@ -9,14 +9,26 @@
 
 
 <body>
-    <div id="scores">
-        <% for(i=1; i<4; i++){%>
-            <li>
-                <%=i%>
-            </li>
 
+    <div id="allScores">
+        <% for(var i=0; i<allScores.length & i<10; i++){ %>
+            <li>
+                <%= allScores[i].score%>
+            </li>
             <%}%>
 
+
+
+
+
     </div>
+    <div id="drillingScores"></div>
+    <div id="productionScores"></div>
+    <div id="geologyScores"></div>
+
+
+
+
+
 
 </body>

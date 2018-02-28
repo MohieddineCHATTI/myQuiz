@@ -1,6 +1,7 @@
 function majorAndLanguage() {
     filter.lang = $('#languageSelect').val();
     filter.majors = $('#majorSelect').val();
+    $('input[name = major]').val(filter.majors);
     console.log(filter);
     starting();
 
@@ -50,7 +51,7 @@ function checkAnswer() {
 
 
 
-var qstNumber = 12,
+var qstNumber = 14,
     score = 0,
     t, correctAnswers = 0,
     wrongAnswers = 0,
@@ -125,24 +126,43 @@ function starting() {
     });
 }
 
-var newScore = {
-    name: "moh",
-    score: 50,
-    country: "algeria",
-    wrongAns: 12,
-    correctAns: 3
-}
-/*function saveScore(){
+
+
+function saveScore() {
+    var myScore = {
+        name: $('input[name = name]').val(),
+        score: $('input[name = score]').val(),
+        country: $('input[name = country]').val(),
+        wrongAns: $('input[name = wrongAns]').val(),
+        correctAns: $('input[name = correctAns]').val(),
+        major: $('input[name = major]').val()
+    }
     $.ajax({
-       
-        type: "POST",
-        url: "/highScores",
-        data: newScore,
-        success: function(data){
-          return;  
-        },
-    });
-}*/
+
+        type: 'POST',
+        url: '/highScores',
+        data: myScore,
+        success: function (data) {
+
+            console.log(data);
+
+
+
+        }
+
+
+
+
+    })
+    console.table(myScore);
+}
+
+
+
+
+
+
+
 
 
 /*
@@ -163,7 +183,7 @@ var qst_data_base = [
         qstImage: "",
         descEn: "this is a discription",
         descFr: "une explication",
-        major: "drilling",
+        major: "all drilling",
         dif: 'easy'
 },
     {
@@ -182,7 +202,7 @@ var qst_data_base = [
         qstImage: "",
         descEn: "this is a discription",
         descFr: "une explication",
-        major: "drilling",
+        major: "all drilling",
         dif: 'medium'
 },
     {
@@ -201,15 +221,129 @@ var qst_data_base = [
         qstImage: "",
         descEn: "this is a discription",
         descFr: "une explication",
-        major: "drilling",
+        major: "all drilling",
+        dif: 'hard'
+},
+    {
+        qstEn: "production easy qst",
+        qstFr: "qst facie production",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all production",
+        dif: 'easy'
+},
+    {
+        qstEn: "production medium qst",
+        qstFr: "qst medium production",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all production",
+        dif: 'medium'
+},
+    {
+        qstEn: "production hard qst",
+        qstFr: "qst difficile production",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all production",
+        dif: 'hard'
+},
+    {
+        qstEn: "geology easy qst",
+        qstFr: "qst facie geology",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all geology",
+        dif: 'easy'
+},
+    {
+        qstEn: "geology medium qst",
+        qstFr: "qst medium geology",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all geology",
+        dif: 'medium'
+},
+    {
+        qstEn: "geology hard qst",
+        qstFr: "qst difficile geology",
+        opt1En: "correct",
+        opt1Fr: "juste",
+        opt2En: "wrong1",
+        opt2Fr: "faux1",
+        opt3En: "wrong2",
+        opt3Fr: "faux2",
+        opt4En: "wrong3",
+        opt4Fr: "faux3",
+        correctEn: "correct",
+        correctFr: "juste",
+        qstImage: "",
+        descEn: "this is a discription",
+        descFr: "une explication",
+        major: "all geology",
         dif: 'hard'
 }
 
-];*/
+];
 
 
 
-/*
+
 function fillDataBase() {
 
     for (i = 0; i < qst_data_base.length; i++) {

@@ -5,7 +5,7 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 
 
-mongoose.connect('mongodb://quizuser:quizuser@ds247678.mlab.com:47678/quiz-data-base');
+mongoose.connect('mongodb://quizuser:quizuser@ds249428.mlab.com:49428/quiz-data-base');
 
 var questionSchema = new mongoose.Schema({
     qstEn: String,
@@ -35,14 +35,18 @@ var scoreSchema = new mongoose.Schema({
     major: String
 });
 var Qst = mongoose.model('qst', questionSchema);
-var Score = mongoose.model('score', scoreSchema)
+var allscore = mongoose.model('allscore', scoreSchema);
 module.exports = (function (app) {
     var filtredEasyQst = [],
         filtredMediumQst = [],
         filtredHardQst = [];
     app.get('/', function (req, res) {
+
         res.render('index');
     });
+
+
+
     app.get('/quiz', function (req, res) {
         res.render('quiz', {
             data: req.query
@@ -132,21 +136,20 @@ module.exports = (function (app) {
     });
 
 
-
+    var allScores = [];
     app.post('/highScores', urlencodedParser, function (req, res) {
+
         console.log(req.body);
-        var newScore = Score(req.body).save(function (err, data) {
+        var newScore = allscore(req.body).save(function (err, data) {
             if (err) throw err;
-        });
-        Score.find({}, function (err, data) {
-            if (err) throw err;
-            var sortedScores = data.sort(function (s1, s2) {
-                return (s2.score - s1.score);
+            allscore.find({}, function (err, data) {
+                res.send(data);
             })
 
-            res.json(sortedScores);
-
         });
-    })
+
+    });
+
+
 
 });
