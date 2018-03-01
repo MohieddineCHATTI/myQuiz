@@ -127,6 +127,12 @@ function starting() {
 }
 
 
+var allTopScores = [],
+    drillingTopScores = [],
+    productionTopScores = [],
+    geologyTopScores = [];
+
+
 
 function saveScore() {
     var myScore = {
@@ -144,7 +150,30 @@ function saveScore() {
         data: myScore,
         success: function (data) {
 
-            console.log(data);
+            var sortedScores = data.sort(function (s1, s2) {
+                return (s2.score - s1.score);
+            });
+            for (var i = 0; i < sortedScores.length; i++) {
+                switch (sortedScores[i].major) {
+                    case "all":
+                        allTopScores.push(sortedScores[i]);
+                        break;
+
+                    case "drilling":
+                        drillingTopScores.push(sortedScores[i]);
+                        break;
+
+                    case "production":
+                        productionTopScores.push(sortedScores[i]);
+                        break;
+
+                    case "geology":
+                        geologyTopScores.push(sortedScores[i]);
+                        break;
+                }
+            }
+
+            fillScoreTable();
 
 
 
@@ -158,6 +187,30 @@ function saveScore() {
 }
 
 
+function fillScoreTable() {
+    console.log('filling');
+
+    console.log(allTopScores);
+    console.log(drillingTopScores);
+    console.log(productionTopScores);
+    console.log(geologyTopScores);
+    for (var i = 0; i < 10 & i < allTopScores.length; i++) {
+        $('#allTopScores').append("<tr><td>" + (i + 1) + "</td><td>" + allTopScores[i].name + "</td><td>" + allTopScores[i].country + "</td><td>" + allTopScores[i].major + "</td><td>" + " " + "</td><td>" + allTopScores[i].score + "</td></tr>");
+    }
+    for (var j = 0; j < 10 & j < drillingTopScores.length; j++) {
+        $('#drillingTopScores').append("<tr><td>" + (j + 1) + "</td><td>" + drillingTopScores[j].name + "</td><td>" + drillingTopScores[j].country + "</td><td>" + drillingTopScores[j].major + "</td><td>" + " " + "</td><td>" + drillingTopScores[j].score + "</td></tr>");
+    }
+    for (var k = 0; k < 10 & k < productionTopScores.length; k++) {
+        $('#productionTopScores').append("<tr><td>" + (k + 1) + "</td><td>" + productionTopScores[k].name + "</td><td>" + productionTopScores[k].country + "</td><td>" + productionTopScores[k].major + "</td><td>" + " " + "</td><td>" + productionTopScores[k].score + "</td></tr>");
+    }
+
+    for (l = 0; l < 10 & l < geologyTopScores.length; l++) {
+        $('#geologyTopScores').append("<tr><td>" + (l + 1) + "</td><td>" + geologyTopScores[l].name + "</td><td>" + geologyTopScores[l].country + "</td><td>" + geologyTopScores[l].major + "</td><td>" + " " + "</td><td>" + geologyTopScores[l].score + "</td></tr>");
+    }
+    document.getElementById('finish').style.display = "none";
+    document.getElementById('topScores').style.display = "block";
+
+}
 
 
 
